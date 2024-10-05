@@ -131,6 +131,7 @@ text = "min"
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 10.0
+value = 2.0
 
 [node name="UppercaseSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
 layout_mode = 2
@@ -158,6 +159,7 @@ text = "min"
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 10.0
+value = 2.0
 
 [node name="LowercaseSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
 layout_mode = 2
@@ -185,6 +187,7 @@ text = "min"
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 10.0
+value = 2.0
 
 [node name="SpecialCharSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
 layout_mode = 2

@@ -3,7 +3,7 @@ class_name PassTree extends Tree
 const COPY_IMAGE = preload("res://sprites/32x32/copy_32x32.png")
 const DELETE_IMAGE = preload("res://sprites/32x32/delete_32x32.png")
 const SHOW_IMAGE = preload("res://sprites/32x32/show_32x32.png")
-const __ := "res://data/pwd_database.res"
+const __ := "user://Kiryonn/GMDP/database.res"
 
 var items: Array[TreeItem] = []
 var data: PackedStringArray

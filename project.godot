@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="GMDP"
-config/description="Enter an interesting project description here!"
+config/description="A bare bone password manager (100% local)"
+config/version="1.0.0"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://icon.png"
 
 [display]
 
