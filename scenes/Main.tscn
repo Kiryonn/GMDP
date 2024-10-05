@@ -1,0 +1,287 @@
+[gd_scene load_steps=8 format=3 uid="uid://dobi8de07l8g3"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_nkv7q"]
+[ext_resource type="Script" path="res://scripts/pass_tree.gd" id="1_nnxqm"]
+[ext_resource type="Texture2D" uid="uid://dy758rf6f7kr7" path="res://sprites/32x32/show_32x32.png" id="2_g0vro"]
+
+[sub_resource type="Theme" id="Theme_r28xu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bk2p"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krdyl"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6m2i"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
+
+[node name="Main" type="Control" node_paths=PackedStringArray("app_le", "pwd_le", "pass_tree")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+theme = SubResource("Theme_r28xu")
+script = ExtResource("1_nkv7q")
+app_le = NodePath("Control/VBoxContainer/LineEdits/AppNameLE")
+pwd_le = NodePath("Control/VBoxContainer/LineEdits/PasswordLE")
+pass_tree = NodePath("PassTree")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = 175.0
+focus_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdits" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="AppNameLE" type="LineEdit" parent="Control/VBoxContainer/LineEdits"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "app_name"
+context_menu_enabled = false
+
+[node name="PasswordLE" type="LineEdit" parent="Control/VBoxContainer/LineEdits"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "password"
+context_menu_enabled = false
+secret = true
+
+[node name="ShowPass" type="Button" parent="Control/VBoxContainer/LineEdits"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("2_g0vro")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="GeneratePassword" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Generate random password"
+
+[node name="AddLineButton" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Add to list"
+
+[node name="AdvancedSettings" type="CheckBox" parent="Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "show advanced"
+
+[node name="Restrictions" type="HBoxContainer" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="NumberSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UseNumbers" type="CheckBox" parent="Control/VBoxContainer/Restrictions/NumberSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Generate password with numbers"
+focus_mode = 0
+button_pressed = true
+text = "Numbers"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/Restrictions/NumberSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Restrictions/NumberSection/HBoxContainer"]
+layout_mode = 2
+text = "min"
+
+[node name="MinNumbers" type="SpinBox" parent="Control/VBoxContainer/Restrictions/NumberSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+
+[node name="UppercaseSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UseUppercase" type="CheckBox" parent="Control/VBoxContainer/Restrictions/UppercaseSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Generate password with characters from A to Z"
+focus_mode = 0
+button_pressed = true
+text = "Uppercase"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/Restrictions/UppercaseSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Restrictions/UppercaseSection/HBoxContainer"]
+layout_mode = 2
+text = "min"
+
+[node name="MinUppercase" type="SpinBox" parent="Control/VBoxContainer/Restrictions/UppercaseSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+
+[node name="LowercaseSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UseLowercase" type="CheckBox" parent="Control/VBoxContainer/Restrictions/LowercaseSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Generate password with characters from a to z"
+focus_mode = 0
+button_pressed = true
+text = "Lowercase"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/Restrictions/LowercaseSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Restrictions/LowercaseSection/HBoxContainer"]
+layout_mode = 2
+text = "min"
+
+[node name="MinLowercase" type="SpinBox" parent="Control/VBoxContainer/Restrictions/LowercaseSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+
+[node name="SpecialCharSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UseSpecialCharacters" type="CheckBox" parent="Control/VBoxContainer/Restrictions/SpecialCharSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Generate password with special characters"
+focus_mode = 0
+text = "Special Characters"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/Restrictions/SpecialCharSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Restrictions/SpecialCharSection/HBoxContainer"]
+layout_mode = 2
+text = "min"
+
+[node name="MinSpecialCharacters" type="SpinBox" parent="Control/VBoxContainer/Restrictions/SpecialCharSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+
+[node name="SpecialCharacters" type="LineEdit" parent="Control/VBoxContainer/Restrictions/SpecialCharSection/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "!@#$%^*~:;&><[]{}|-_+=?"
+context_menu_enabled = false
+
+[node name="SizeSection" type="VBoxContainer" parent="Control/VBoxContainer/Restrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Restrictions/SizeSection"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Size"
+vertical_alignment = 1
+
+[node name="MinLength" type="HBoxContainer" parent="Control/VBoxContainer/Restrictions/SizeSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MinLengthLabel" type="Label" parent="Control/VBoxContainer/Restrictions/SizeSection/MinLength"]
+layout_mode = 2
+text = "min"
+
+[node name="MinLength" type="SpinBox" parent="Control/VBoxContainer/Restrictions/SizeSection/MinLength"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 99.0
+value = 12.0
+
+[node name="MaxLengthLabel" type="Label" parent="Control/VBoxContainer/Restrictions/SizeSection/MinLength"]
+layout_mode = 2
+text = "max"
+
+[node name="MaxLength" type="SpinBox" parent="Control/VBoxContainer/Restrictions/SizeSection/MinLength"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 99.0
+value = 15.0
+
+[node name="PassTree" type="Tree" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 200.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_styles/title_button_hover = SubResource("StyleBoxFlat_3bk2p")
+theme_override_styles/title_button_pressed = SubResource("StyleBoxFlat_krdyl")
+theme_override_styles/title_button_normal = SubResource("StyleBoxFlat_u6m2i")
+columns = 5
+column_titles_visible = true
+hide_folding = true
+hide_root = true
+select_mode = 1
+scroll_horizontal_enabled = false
+script = ExtResource("1_nnxqm")
+
+[connection signal="button_down" from="Control/VBoxContainer/LineEdits/ShowPass" to="." method="_on_show_pass_button_down"]
+[connection signal="button_up" from="Control/VBoxContainer/LineEdits/ShowPass" to="." method="_on_show_pass_button_up"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/GeneratePassword" to="." method="_on_generate_password_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/AddLineButton" to="." method="_on_add_line_button_pressed"]
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/AdvancedSettings" to="." method="_on_advanced_settings_toggled"]
+[connection signal="button_clicked" from="PassTree" to="PassTree" method="_on_button_clicked"]

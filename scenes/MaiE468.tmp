@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dobi8de07l8g3"]
+
+[ext_resource type="Script" path="res://scripts/pass_tree.gd" id="1_nnxqm"]
+
+[sub_resource type="Theme" id="Theme_r28xu"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_r28xu")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tree" type="Tree" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+column_titles_visible = true
+hide_folding = true
+scroll_horizontal_enabled = false
+script = ExtResource("1_nnxqm")
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+initial_position = 4
+size = Vector2i(500, 281)
+min_size = Vector2i(500, 281)
+content_scale_mode = 1
+content_scale_aspect = 4
