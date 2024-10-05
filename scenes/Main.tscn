@@ -43,6 +43,7 @@ pass_tree = NodePath("PassTree")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 10
 anchor_right = 1.0
 offset_left = 25.0
 offset_top = 25.0
@@ -282,9 +283,16 @@ select_mode = 1
 scroll_horizontal_enabled = false
 script = ExtResource("1_nnxqm")
 
+[node name="DeletionDialog" type="ConfirmationDialog" parent="PassTree"]
+initial_position = 4
+size = Vector2i(498, 100)
+ok_button_text = "Delete"
+dialog_text = "The deletion of a password is definitive. There's no going back."
+
 [connection signal="button_down" from="Control/VBoxContainer/LineEdits/ShowPass" to="." method="_on_show_pass_button_down"]
 [connection signal="button_up" from="Control/VBoxContainer/LineEdits/ShowPass" to="." method="_on_show_pass_button_up"]
 [connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/GeneratePassword" to="." method="_on_generate_password_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/AddLineButton" to="." method="_on_add_line_button_pressed"]
 [connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/AdvancedSettings" to="." method="_on_advanced_settings_toggled"]
 [connection signal="button_clicked" from="PassTree" to="PassTree" method="_on_button_clicked"]
+[connection signal="confirmed" from="PassTree/DeletionDialog" to="PassTree" method="_on_deletion_dialog_confirmed"]

@@ -5,9 +5,12 @@ const DELETE_IMAGE = preload("res://sprites/32x32/delete_32x32.png")
 const SHOW_IMAGE = preload("res://sprites/32x32/show_32x32.png")
 const __ := "user://Kiryonn/GMDP/database.res"
 
+@onready var deletion_dialog: ConfirmationDialog = $DeletionDialog
+
 var items: Array[TreeItem] = []
 var data: PackedStringArray
 var visible_pwd := {}
+var deletion_attempt: int = -1
 
 func _ready() -> void:
 	data = load_data()
@@ -51,6 +54,7 @@ func add_line(app_name: String, pwd: String) -> void:
 	save_data()
 
 func remove_line(index: int) -> void:
+	if index < 0: return
 	var item = items[index]
 	items.remove_at(index)
 	data.remove_at(index*2)
@@ -96,4 +100,9 @@ func _on_button_clicked(item: TreeItem, column: int, _id: int, mouse_button_inde
 	elif column == 3:
 		copy_pwd_to_clipboard(index)
 	elif column == 4:
-		remove_line(index)
+		deletion_attempt = index
+		deletion_dialog.show()
+
+func _on_deletion_dialog_confirmed() -> void:
+	remove_line(deletion_attempt)
+	deletion_attempt = -1
