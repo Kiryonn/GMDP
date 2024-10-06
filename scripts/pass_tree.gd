@@ -3,7 +3,8 @@ class_name PassTree extends Tree
 const COPY_IMAGE = preload("res://sprites/32x32/copy_32x32.png")
 const DELETE_IMAGE = preload("res://sprites/32x32/delete_32x32.png")
 const SHOW_IMAGE = preload("res://sprites/32x32/show_32x32.png")
-const __ := "user://Kiryonn/GMDP/database.res"
+const older_save_path := "user://Kiryonn/GMDP/database.res"
+const __ := "user://data/database.res"
 
 @onready var deletion_dialog: ConfirmationDialog = $DeletionDialog
 
@@ -68,9 +69,15 @@ func _exit_tree() -> void:
 
 func load_data() -> PackedStringArray:
 	data = PackedStringArray()
+	#region convert_old_save
+	if ResourceLoader.exists(older_save_path):
+		var database = ResourceLoader.load(older_save_path)
+		data.append_array(database.items)
+		OS.move_to_trash(ProjectSettings.globalize_path("user://Kiryonn/"))
+	#endregion convert_old_save
 	if ResourceLoader.exists(__):
 		var database = ResourceLoader.load(__)
-		data = database.items
+		data.append_array(database.items)
 	else:
 		save_data()
 	return data
